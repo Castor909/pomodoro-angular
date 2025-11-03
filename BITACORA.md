@@ -1,4 +1,4 @@
-# Bitácora de Desarrollo - Aplicación Temporizador Pomodoro
+# Entrega 04 - Aplicación Temporizador Pomodoro
 
 ## 📋 Índice
 1. [Introducción](#introducción)
