@@ -1,0 +1,115 @@
+<div class="settings-container">
+  <button 
+    class="settings-toggle-btn"
+    (click)="toggleSettings()"
+    [attr.aria-label]="isOpen() ? 'Cerrar configuración' : 'Abrir configuración'">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M12 1v6m0 6v6m-7-7h6m6 0h6m-13.66 5.66l4.24-4.24m4.24 0l4.24 4.24m-4.24-8.48l4.24-4.24m-8.48 0l4.24 4.24"></path>
+    </svg>
+    <span>Configuración</span>
+  </button>
+
+  @if (isOpen()) {
+    <div class="settings-overlay" (click)="onCancel()">
+      <div class="settings-modal" (click)="$event.stopPropagation()">
+        <div class="settings-header">
+          <h2>Configuración del Temporizador</h2>
+          <button 
+            class="close-btn"
+            (click)="onCancel()"
+            aria-label="Cerrar">
+            ×
+          </button>
+        </div>
+
+        <div class="settings-body">
+          <div class="setting-group">
+            <label for="work-duration">
+              <span class="setting-label">Duración del Trabajo</span>
+              <span class="setting-subtitle">minutos por sesión</span>
+            </label>
+            <input 
+              id="work-duration"
+              type="number" 
+              min="1" 
+              max="60"
+              [(ngModel)]="workDuration"
+              class="setting-input">
+          </div>
+
+          <div class="setting-group">
+            <label for="short-break">
+              <span class="setting-label">Descanso Corto</span>
+              <span class="setting-subtitle">minutos de descanso</span>
+            </label>
+            <input 
+              id="short-break"
+              type="number" 
+              min="1" 
+              max="30"
+              [(ngModel)]="shortBreakDuration"
+              class="setting-input">
+          </div>
+
+          <div class="setting-group">
+            <label for="long-break">
+              <span class="setting-label">Descanso Largo</span>
+              <span class="setting-subtitle">minutos de descanso</span>
+            </label>
+            <input 
+              id="long-break"
+              type="number" 
+              min="1" 
+              max="60"
+              [(ngModel)]="longBreakDuration"
+              class="setting-input">
+          </div>
+
+          <div class="setting-group">
+            <label for="sessions-count">
+              <span class="setting-label">Sesiones hasta Descanso Largo</span>
+              <span class="setting-subtitle">número de pomodoros</span>
+            </label>
+            <input 
+              id="sessions-count"
+              type="number" 
+              min="1" 
+              max="10"
+              [(ngModel)]="sessionsUntilLongBreak"
+              class="setting-input">
+          </div>
+        </div>
+
+        <div class="settings-footer">
+          <button 
+            class="btn btn-ghost"
+            (click)="onReset()">
+            Restablecer
+          </button>
+          <div class="footer-actions">
+            <button 
+              class="btn btn-secondary"
+              (click)="onCancel()">
+              Cancelar
+            </button>
+            <button 
+              class="btn btn-primary"
+              (click)="onSave()">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

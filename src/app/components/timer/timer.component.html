@@ -1,0 +1,55 @@
+<div class="timer-container" [ngClass]="modeClass()">
+  <div class="timer-header">
+    <h2 class="mode-label">{{ pomodoroService.modeLabel() }}</h2>
+    <div class="sessions-counter">
+      <span class="counter-label">Sesiones completadas:</span>
+      <span class="counter-value">{{ pomodoroService.completedSessions() }}</span>
+    </div>
+  </div>
+
+  <div class="timer-display">
+    <div class="time-wrapper">
+      <span class="time">
+        {{ formatTime(pomodoroService.minutes()) }}:{{ formatTime(pomodoroService.seconds()) }}
+      </span>
+    </div>
+    <div class="progress-bar">
+      <div 
+        class="progress-fill" 
+        [style.width.%]="pomodoroService.progressPercentage()">
+      </div>
+    </div>
+  </div>
+
+  <div class="timer-controls">
+    @if (pomodoroService.isIdle() || pomodoroService.isPaused()) {
+      <button 
+        class="btn btn-primary btn-large"
+        (click)="pomodoroService.isIdle() ? onStart() : onResume()">
+        {{ pomodoroService.isIdle() ? 'Iniciar' : 'Reanudar' }}
+      </button>
+    }
+    
+    @if (pomodoroService.isRunning()) {
+      <button 
+        class="btn btn-warning btn-large"
+        (click)="onPause()">
+        Pausar
+      </button>
+    }
+
+    @if (!pomodoroService.isIdle()) {
+      <button 
+        class="btn btn-secondary"
+        (click)="onReset()">
+        Reiniciar
+      </button>
+      
+      <button 
+        class="btn btn-secondary"
+        (click)="onSkip()">
+        Saltar
+      </button>
+    }
+  </div>
+</div>
